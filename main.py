@@ -27,6 +27,6 @@ def count_accessible_cells(start_x, start_y):
     return accessible_cells
 
 
-start_x, start_y = 100, 100
+start_x, start_y = 1000, 1000
 result = count_accessible_cells(start_x, start_y)
 print("Количество доступных клеток для муравья:", result)
