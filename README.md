@@ -1,30 +1,26 @@
-# Solution
+## Task
 
-Решение задачи для компании: ООО Передовые технологии
+There is an ant on an infinite coordinate grid. The ant can move 1 square up (x,y+1), down (x,y-1), left (x-1,y), right (x+1,y), one square per step. Cells in which the sum of the digits in the X coordinate plus the sum of the digits in the Y coordinate are greater than 25 are inaccessible to the ant. For example, a cell with coordinates (59, 79) is inaccessible because 5+9+7+9=30, which is more than 25. How many cells can an ant visit if its starting position is (1000,1000), (including the starting cell).
 
-## Задача
+## Solution
 
-На бесконечной координатной сетке находится муравей. Муравей может перемещаться на 1 клетку вверх (x,y+1), вниз (x,y-1), влево (x-1,y), вправо (x+1,y), по одной клетке за шаг. Клетки, в которых сумма цифр в координате X плюс сумма цифр в координате Y больше чем 25 недоступны муравью. Например, клетка с координатами (59, 79) недоступна, т.к. 5+9+7+9=30, что больше 25. Сколько cклеток может посетить муравей если его начальная позиция (1000,1000), (включая начальную клетку).
+- digit_sum function: This function takes an integer and returns the sum of its digits. It converts a number to a string, then each character in the string is converted back to an integer, and the numbers are summed.
 
-## Решение
+- is_accessible function: This function takes x and y coordinates and checks whether the cell with these coordinates is accessible to the ant. To do this, it calls digit_sum for each coordinate and checks that the sum of the digits of the x and y coordinates does not exceed 25.
 
-- Функция digit_sum: Эта функция принимает целое число и возвращает сумму его цифр. Она преобразует число в строку, затем каждый символ строки преобразуется обратно в целое число, и эти числа суммируются.
+- count_accessible_cells function: This function takes the ant's starting coordinates (start_x, start_y) and uses breadth-first traversal to count the number of accessible cells starting from those coordinates.
 
-- Функция is_accessible: Эта функция принимает координаты x и y и проверяет, доступна ли клетка с этими координатами для муравья. Для этого она вызывает digit_sum для каждой координаты и проверяет, что сумма цифр координат x и y не превышает 25.
+A stack is created, to which the starting coordinates are added.
+An empty visited set is created to keep track of cells that have already been visited.
+A list of directions is created containing possible directions of movement: up, down, left and right.
+While the stack is not empty:
+We retrieve the coordinates (x, y) from the top of the stack.
+If the cell with these coordinates has not been visited:
+We add it to the set of visited ones.
+If the cell is accessible (check using is_accessible), increase the accessible_cells counter by 1.
+For each direction of movement:
+We calculate new coordinates new_x and new_y.
+We add them to the stack to check them in the next iterations.
+Finally, we run count_accessible_cells with the ant's starting coordinates (1000, 1000) and print the result.
 
-- Функция count_accessible_cells: Эта функция принимает начальные координаты муравья (start_x, start_y) и использует обход в ширину для подсчета количества доступных клеток, начиная с этих координат.
-
-Создается стек stack, в который добавляются начальные координаты.
-Создается пустое множество visited, чтобы отслеживать уже посещенные клетки.
-Создается список directions, содержащий возможные направления движения: вверх, вниз, влево и вправо.
-Пока стек не пустой:
-Извлекаем координаты (x, y) из вершины стека.
-Если клетка с этими координатами не была посещена:
-Добавляем ее в множество посещенных.
-Если клетка доступна (проверяем с помощью is_accessible), увеличиваем счетчик accessible_cells на 1.
-Для каждого направления движения:
-Вычисляем новые координаты new_x и new_y.
-Добавляем их в стек, чтобы проверить их на следующих итерациях.
-Наконец, мы запускаем count_accessible_cells с начальными координатами муравья (1000, 1000) и выводим результат.
-
-Этот алгоритм эффективно находит все доступные клетки, начиная с заданных начальных координат, и подсчитывает их количество.
+This algorithm efficiently finds all available cells starting from the given initial coordinates and counts their number.
